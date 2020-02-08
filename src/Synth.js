@@ -53,7 +53,8 @@ const Synth = () => {
                 ))}
             </div>
             <footer>
-                crafted with ❤️ by <a href="http://borzeckid.com">borzecki</a>
+                crafted with <span role="img">❤️</span> by{' '}
+                <a href="http://borzeckid.com">borzecki</a>
             </footer>
         </div>
     );
