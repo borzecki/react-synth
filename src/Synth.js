@@ -23,12 +23,13 @@ const Synth = () => {
     const [type, setType] = React.useState('sine');
     const [scale, setScale] = React.useState(0);
 
+    // control octave and filters
     React.useEffect(() => {
         if ('1234'.indexOf(key) >= 0) {
             setType(soundTypes['1234'.indexOf(key)]);
-        } else if (key === '-') {
+        } else if ('-z'.indexOf(key) >= 0) {
             setScale(scale - 1);
-        } else if (key === '=') {
+        } else if ('=x'.indexOf(key) >= 0) {
             setScale(scale + 1);
         }
     }, [key]);
@@ -53,8 +54,11 @@ const Synth = () => {
                 ))}
             </div>
             <footer>
-                crafted with <span role="img">❤️</span> by{' '}
-                <a href="http://borzeckid.com">borzecki</a>
+                crafted with{' '}
+                <span role="img" aria-label="heart">
+                    ❤️
+                </span>{' '}
+                by <a href="http://borzeckid.com">borzecki</a>
             </footer>
         </div>
     );

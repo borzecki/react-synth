@@ -37,14 +37,17 @@ export const useKey = targetKey => {
 export const useKeysPress = () => {
     const [key, setKey] = useState();
     const [keysPressed, setKeyPressed] = useState(new Set([]));
+    let clonedSet;
+
     const onKeyDown = e => {
         setKey(e.key);
         setKeyPressed(keysPressed.add(e.key));
     };
     const onKeyUp = e => {
         setKey(null);
-        keysPressed.delete(e.key);
-        setKeyPressed(keysPressed);
+        clonedSet = new Set(keysPressed);
+        clonedSet.delete(e.key);
+        setKeyPressed(clonedSet);
     };
     useEffect(() => {
         window.addEventListener('keydown', onKeyDown);

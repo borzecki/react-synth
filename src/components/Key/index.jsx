@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import classnames from 'classnames';
 
 import playSound from '../../playSound';
@@ -9,18 +9,22 @@ const blackKeys = 'wetyu'.split('');
 
 const Key = ({ keyboardCode, index, scale, type }) => {
     const isBlack = blackKeys.indexOf(keyboardCode) >= 0;
-
-    const hook = useKey(keyboardCode);
+    const [depressed, setDepressed] = useState(false);
+    const keyPressed = useKey(keyboardCode);
     useEffect(() => {
-        if (hook) playSound(octave[index] * 2 ** scale, type);
-    }, [hook, index, scale, type]);
+        if (keyPressed) playSound(octave[index] * 2 ** scale, type);
+    }, [keyPressed, index, scale, type]);
     return (
         <div
             className={classnames('Button', {
                 Black: isBlack,
-                Pressed: hook
+                Pressed: keyPressed || depressed
             })}
-            onClick={() => playSound(octave[index] * 2 ** scale, type)}
+            onMouseDown={() => {
+                setDepressed(true);
+                playSound(octave[index] * 2 ** scale, type);
+            }}
+            onMouseUp={() => setDepressed(false)}
         >
             {notes[index]}
         </div>
