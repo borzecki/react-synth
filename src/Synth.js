@@ -44,6 +44,7 @@ const Synth = () => {
             />
             <NumericControl
                 min={0.5}
+                max={10}
                 increment={0.5}
                 value={duration}
                 setValue={setDuration}
