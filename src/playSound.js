@@ -1,13 +1,33 @@
-const context = new AudioContext();
+let AudioContext =
+    window.AudioContext || // Default
+    window.webkitAudioContext || // Safari and old versions of Chrome
+    false;
+let playSound;
 
-export default (frequency, type) => {
-    const o = context.createOscillator();
-    let g = context.createGain();
+if (AudioContext) {
+    const context = new AudioContext();
+    playSound = (frequency, type) => {
+        const oscillator = context.createOscillator();
+        const gain = context.createGain();
+        const now = context.currentTime;
 
-    o.type = type;
-    o.connect(g);
-    o.frequency.value = frequency;
-    g.connect(context.destination);
-    o.start(0);
-    g.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + 2);
-};
+        oscillator.type = type;
+        oscillator.connect(gain);
+        oscillator.frequency.value = frequency;
+
+        gain.connect(context.destination);
+
+        gain.gain.setValueAtTime(1, now);
+        gain.gain.exponentialRampToValueAtTime(0.00001, now + 2);
+
+        oscillator.start(now);
+        oscillator.stop(now + 2);
+    };
+} else {
+    alert(
+        'Sorry, but the Web Audio API is not supported by your browser. Please, consider upgrading to the latest version or downloading Google Chrome or Mozilla Firefox'
+    );
+    playSound = () => {};
+}
+
+export default playSound;
