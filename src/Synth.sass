@@ -1,53 +1,89 @@
+$base-black: #3e3e3e
+$active: #ff6060
+
+@keyframes flip-horizontal-bottom
+    0%
+        transform: rotateX(0)
+
+    100%
+        transform: rotateX(-180deg)
+
 .Sequence
     display: inline-block
 
+.ButtonBox
+    margin-top: 10%
+
 .Button
+    border: $base-black 1px solid
     display: inline-block
-    margin: 1px
+    margin: 4px
     width: 3em
-    height: 25em
-    color: black
+    height: 3em
+    border-radius: 3em
+    color: $base-black
     background: white
-    border: 1px solid
     cursor: pointer
+    transition: 1s cubic-bezier(0, 1, 0, 1)
 
 .Black
+    border: white 1px solid
     color: white
-    background: black
+    background: $base-black
 
 .Pressed
-    background: rgb(163, 255, 163)
-    transition: background 0.2s ease-in-out
-    color: white
+    border: $active 1px solid
+    background: $active
+    transform: translate(0, 3em)
+
+.MousePressed
+    border: $active 1px solid
+    background: $active
+
+.Separator
+    border: 1px darken($base-black, 5%) solid
+    margin: 30px
 
 .OctaveControl
-    font-size: 20pt
-    margin: 10px
-    cursor: pointer
-
-.SoundType
+    font-size: 17pt
     display: inline-block
+    width: 2em
     margin: 10px
     cursor: pointer
 
-.ActiveType
-    color: red
+.PushButton
+    display: inline-block
+    padding: 1em 2em
+    margin: 0.5em
+    cursor: pointer
+    border-radius: 0.2em
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0 -3px 0 rgba(0, 0, 0, 0.22)
+    transition: 0.3s
+    user-select: none
+    cursor: pointer
+    img
+        width: 14px
 
-.Container
-    margin: 5%
+    &:hover
+        background: lighten($base-black, 10%)
 
-h1
-    margin: 5%
+.ActivePushButton
+    background: $active
+    transform: translateY(2px)
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2), inset 0px -1px 0 rgba(0,0,0,0.22)
 
 footer
     position: fixed
     left: 0
-    bottom: 0
+    bottom: 10px
     width: 100%
-    background-color: black
+    background-color: $base-black
     color: white
     text-align: center
 
+    img
+        width: 20px
     a
         color: white
-        text-decoration: underline
+        text-decoration: none
+        font-weight: bold
