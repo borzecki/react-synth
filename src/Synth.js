@@ -6,7 +6,7 @@ import ButtonBox from './components/ButtonBox';
 import Footer from './components/Footer';
 
 import { soundTypes } from './constants';
-import { useKeysPress } from './hooks';
+import { useKeysPress, useMedia } from './hooks';
 
 import './Synth.sass';
 import 'balloon-css';
@@ -14,6 +14,7 @@ import 'balloon-css';
 const Separator = () => <div className="Separator" />;
 
 const Synth = () => {
+    const largeSceen = useMedia('(min-width: 800px)');
     const [key] = useKeysPress();
     const [type, setType] = React.useState('triangle');
     const [octave, setOctave] = React.useState(0);
@@ -54,7 +55,7 @@ const Synth = () => {
                 octave={octave}
                 duration={duration}
                 type={type}
-                showMessages={true}
+                showMessages={largeSceen}
             />
             <Footer />
         </>

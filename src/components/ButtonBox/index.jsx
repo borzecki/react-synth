@@ -8,7 +8,7 @@ const ButtonBox = ({ octave, duration, type, showMessages }) => (
         {keysToNotes.map((key, index) => (
             <Key
                 key={key}
-                message={showMessages && messages[index]}
+                message={showMessages ? messages[index] : null}
                 keyboardCode={key}
                 index={index}
                 duration={duration}
