@@ -1,26 +1,20 @@
 import React from 'react';
-import classnames from 'classnames';
 
-import Key from './components/Key';
 import OctaveControl from './components/OctaveControl';
+import SoundTypeControl from './components/SoundTypeControl';
+import ButtonBox from './components/ButtonBox';
+import Footer from './components/Footer';
 
-import { soundTypes, keysToNotes } from './constants';
+import { soundTypes } from './constants';
 import { useKeysPress } from './hooks';
 
 import './Synth.sass';
 
-const SoundType = ({ type, active, onClick }) => (
-    <div
-        className={classnames('SoundType', { ActiveType: type === active })}
-        onClick={() => onClick(type)}
-    >
-        {type}
-    </div>
-);
+const Separator = () => <div className="Separator" />;
 
 const Synth = () => {
     const [key] = useKeysPress();
-    const [type, setType] = React.useState('sine');
+    const [type, setType] = React.useState('triangle');
     const [scale, setScale] = React.useState(0);
 
     // control octave and filters
@@ -35,32 +29,13 @@ const Synth = () => {
     }, [key]);
 
     return (
-        <div className="Container">
-            <h1>react-synth</h1>
+        <>
+            <SoundTypeControl active={type} onClick={setType} />
+            <Separator />
             <OctaveControl scale={scale} setScale={setScale} />
-            <div>
-                {soundTypes.map(t => (
-                    <SoundType type={t} active={type} onClick={setType} />
-                ))}
-            </div>
-            <div>
-                {keysToNotes.map((key, index) => (
-                    <Key
-                        keyboardCode={key}
-                        index={index}
-                        scale={scale}
-                        type={type}
-                    />
-                ))}
-            </div>
-            <footer>
-                crafted with{' '}
-                <span role="img" aria-label="heart">
-                    ❤️
-                </span>{' '}
-                by <a href="http://borzeckid.com">borzecki</a>
-            </footer>
-        </div>
+            <ButtonBox scale={scale} type={type} />
+            <Footer />
+        </>
     );
 };
 

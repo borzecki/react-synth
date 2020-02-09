@@ -3,13 +3,13 @@ import classnames from 'classnames';
 
 import playSound from '../../playSound';
 import { useKey } from '../../hooks';
-import { notes, octave } from '../../constants';
+import { octave } from '../../constants';
 
-const blackKeys = 'wetyu'.split('');
+const blackKeys = 'wetyuop'.split('');
 
 const Key = ({ keyboardCode, index, scale, type }) => {
     const isBlack = blackKeys.indexOf(keyboardCode) >= 0;
-    const [depressed, setDepressed] = useState(false);
+    const [mousePressed, setMousePressed] = useState(false);
     const keyPressed = useKey(keyboardCode);
     useEffect(() => {
         if (keyPressed) playSound(octave[index] * 2 ** scale, type);
@@ -18,16 +18,15 @@ const Key = ({ keyboardCode, index, scale, type }) => {
         <div
             className={classnames('Button', {
                 Black: isBlack,
-                Pressed: keyPressed || depressed
+                Pressed: keyPressed,
+                MousePressed: mousePressed
             })}
             onMouseDown={() => {
-                setDepressed(true);
+                setMousePressed(true);
                 playSound(octave[index] * 2 ** scale, type);
             }}
-            onMouseUp={() => setDepressed(false)}
-        >
-            {notes[index]}
-        </div>
+            onMouseUp={() => setMousePressed(false)}
+        ></div>
     );
 };
 

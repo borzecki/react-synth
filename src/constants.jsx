@@ -1,5 +1,5 @@
-export const keysToNotes = 'awsedftgyhujk'.split('');
-export const soundTypes = ['sine', 'square', 'triangle', 'sawtooth'];
+export const keysToNotes = "awsedftgyhujkolp;'".split('');
+export const soundTypes = ['triangle', 'square', 'sine', 'sawtooth'];
 
 export const octave = [
     261.6,
@@ -14,7 +14,12 @@ export const octave = [
     440.0,
     466.2,
     493.9,
-    523.3
+    523.3,
+    554.4,
+    587.3,
+    622.3,
+    659.3,
+    698.5
 ];
 
 export const notes = [
