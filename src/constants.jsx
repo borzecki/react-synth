@@ -21,7 +21,7 @@ export const messages = [
 
 export const soundTypes = ['triangle', 'square', 'sine', 'sawtooth'];
 
-export const octave = [
+export const frequencies = [
     261.6,
     277.2,
     293.7,

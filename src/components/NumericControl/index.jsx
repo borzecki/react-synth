@@ -4,13 +4,13 @@ import classnames from 'classnames';
 import minus from '../../static/minus.svg';
 import plus from '../../static/plus.svg';
 
-const OctaveControl = ({ scale, setScale }) => {
+const NumericControl = ({ value, setValue, increment, message, min, max }) => {
     const [pushedButton, setPushedButton] = useState(null);
+    const conditionMax = max ? value + increment <= max : true;
+    const conditionMin = min ? value - increment >= min : true;
     return (
         <>
             <span
-                aria-label="Z"
-                data-balloon-pos="up"
                 className={classnames('PushButton', {
                     ActivePushButton: pushedButton === 'up'
                 })}
@@ -20,20 +20,18 @@ const OctaveControl = ({ scale, setScale }) => {
                 onMouseUp={() => {
                     setPushedButton();
                 }}
-                onClick={() => setScale(scale - 1)}
+                onClick={() => conditionMin && setValue(value - increment)}
             >
                 <img src={minus} alt="minus" />
             </span>
             <span
-                aria-label="this is Octave transposer"
+                aria-label={message}
                 data-balloon-pos="up"
                 className="OctaveControl"
             >
-                {scale}
+                {value}
             </span>
             <span
-                aria-label="X"
-                data-balloon-pos="up"
                 className={classnames('PushButton', {
                     ActivePushButton: pushedButton === 'down'
                 })}
@@ -43,7 +41,7 @@ const OctaveControl = ({ scale, setScale }) => {
                 onMouseUp={() => {
                     setPushedButton();
                 }}
-                onClick={() => setScale(scale + 1)}
+                onClick={() => conditionMax && setValue(value + increment)}
             >
                 <img src={plus} alt="plus" />
             </span>
@@ -51,4 +49,4 @@ const OctaveControl = ({ scale, setScale }) => {
     );
 };
 
-export default OctaveControl;
+export default NumericControl;

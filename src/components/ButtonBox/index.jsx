@@ -3,7 +3,7 @@ import Key from '../Key';
 
 import { keysToNotes, messages } from '../../constants';
 
-const ButtonBox = ({ scale, type, showMessages }) => (
+const ButtonBox = ({ octave, duration, type, showMessages }) => (
     <div className="ButtonBox">
         {keysToNotes.map((key, index) => (
             <Key
@@ -11,7 +11,8 @@ const ButtonBox = ({ scale, type, showMessages }) => (
                 message={showMessages && messages[index]}
                 keyboardCode={key}
                 index={index}
-                scale={scale}
+                duration={duration}
+                octave={octave}
                 type={type}
             />
         ))}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import OctaveControl from './components/OctaveControl';
+import NumericControl from './components/NumericControl';
 import SoundTypeControl from './components/SoundTypeControl';
 import ButtonBox from './components/ButtonBox';
 import Footer from './components/Footer';
@@ -16,16 +16,17 @@ const Separator = () => <div className="Separator" />;
 const Synth = () => {
     const [key] = useKeysPress();
     const [type, setType] = React.useState('triangle');
-    const [scale, setScale] = React.useState(0);
+    const [octave, setOctave] = React.useState(0);
+    const [duration, setDuration] = React.useState(1.5);
 
     // control octave and filters
     React.useEffect(() => {
         if ('1234'.indexOf(key) >= 0) {
             setType(soundTypes['1234'.indexOf(key)]);
         } else if ('-z'.indexOf(key) >= 0) {
-            setScale(scale - 1);
+            setOctave(octave - 1);
         } else if ('=x'.indexOf(key) >= 0) {
-            setScale(scale + 1);
+            setOctave(octave + 1);
         }
     }, [key]);
 
@@ -33,8 +34,27 @@ const Synth = () => {
         <>
             <SoundTypeControl active={type} onClick={setType} />
             <Separator />
-            <OctaveControl scale={scale} setScale={setScale} />
-            <ButtonBox scale={scale} type={type} showMessages={true} />
+            <NumericControl
+                min={-4}
+                max={5}
+                increment={1}
+                value={octave}
+                setValue={setOctave}
+                message="this is octave control"
+            />
+            <NumericControl
+                min={0.5}
+                increment={0.5}
+                value={duration}
+                setValue={setDuration}
+                message="sound duration control"
+            />
+            <ButtonBox
+                octave={octave}
+                duration={duration}
+                type={type}
+                showMessages={true}
+            />
             <Footer />
         </>
     );
