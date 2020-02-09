@@ -1,13 +1,14 @@
 import React from 'react';
 import Key from '../Key';
 
-import { keysToNotes } from '../../constants';
+import { keysToNotes, messages } from '../../constants';
 
-const ButtonBox = ({ scale, type }) => (
+const ButtonBox = ({ scale, type, showMessages }) => (
     <div className="ButtonBox">
         {keysToNotes.map((key, index) => (
             <Key
                 key={key}
+                message={showMessages && messages[index]}
                 keyboardCode={key}
                 index={index}
                 scale={scale}

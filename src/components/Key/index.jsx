@@ -7,7 +7,7 @@ import { octave } from '../../constants';
 
 const blackKeys = 'wetyuop'.split('');
 
-const Key = ({ keyboardCode, index, scale, type }) => {
+const Key = ({ keyboardCode, index, scale, type, message }) => {
     const isBlack = blackKeys.indexOf(keyboardCode) >= 0;
     const [mousePressed, setMousePressed] = useState(false);
     const keyPressed = useKey(keyboardCode);
@@ -16,6 +16,8 @@ const Key = ({ keyboardCode, index, scale, type }) => {
     }, [keyPressed, index, scale, type]);
     return (
         <div
+            aria-label={message}
+            data-balloon-pos="up"
             className={classnames('Button', {
                 Black: isBlack,
                 Pressed: keyPressed,

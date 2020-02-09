@@ -9,6 +9,7 @@ import { soundTypes } from './constants';
 import { useKeysPress } from './hooks';
 
 import './Synth.sass';
+import 'balloon-css';
 
 const Separator = () => <div className="Separator" />;
 
@@ -33,7 +34,7 @@ const Synth = () => {
             <SoundTypeControl active={type} onClick={setType} />
             <Separator />
             <OctaveControl scale={scale} setScale={setScale} />
-            <ButtonBox scale={scale} type={type} />
+            <ButtonBox scale={scale} type={type} showMessages={true} />
             <Footer />
         </>
     );

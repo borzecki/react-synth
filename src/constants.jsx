@@ -1,4 +1,24 @@
 export const keysToNotes = "awsedftgyhujkolp;'".split('');
+
+export const messages = [
+    'Hey!',
+    null,
+    'Welcome 😀',
+    null,
+    null,
+    'Did you know 🤔',
+    null,
+    'You can use your keyboard ⌨️',
+    'To play? 🎹',
+    null,
+    'Try it!',
+    'this is `J`',
+    'K',
+    'and so on',
+    null,
+    'Enjoy 🤩'
+];
+
 export const soundTypes = ['triangle', 'square', 'sine', 'sawtooth'];
 
 export const octave = [

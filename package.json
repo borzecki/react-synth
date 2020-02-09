@@ -4,6 +4,7 @@
   "private": false,
   "homepage": "http://borzecki.github.io/react-synth",
   "dependencies": {
+    "balloon-css": "^1.0.4",
     "classnames": "^2.2.6",
     "node-sass": "^4.13.1",
     "react": "^16.8.6",

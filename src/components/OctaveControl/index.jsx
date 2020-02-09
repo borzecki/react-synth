@@ -9,6 +9,8 @@ const OctaveControl = ({ scale, setScale }) => {
     return (
         <>
             <span
+                aria-label="Z"
+                data-balloon-pos="up"
                 className={classnames('PushButton', {
                     ActivePushButton: pushedButton === 'up'
                 })}
@@ -18,12 +20,20 @@ const OctaveControl = ({ scale, setScale }) => {
                 onMouseUp={() => {
                     setPushedButton();
                 }}
-                onClick={() => setScale(scale + 1)}
+                onClick={() => setScale(scale - 1)}
             >
-                <img src={plus} alt="plus" />
+                <img src={minus} alt="minus" />
             </span>
-            <span className="OctaveControl">{scale}</span>
             <span
+                aria-label="this is Octave transposer"
+                data-balloon-pos="up"
+                className="OctaveControl"
+            >
+                {scale}
+            </span>
+            <span
+                aria-label="X"
+                data-balloon-pos="up"
                 className={classnames('PushButton', {
                     ActivePushButton: pushedButton === 'down'
                 })}
@@ -33,9 +43,9 @@ const OctaveControl = ({ scale, setScale }) => {
                 onMouseUp={() => {
                     setPushedButton();
                 }}
-                onClick={() => setScale(scale - 1)}
+                onClick={() => setScale(scale + 1)}
             >
-                <img src={minus} alt="minus" />
+                <img src={plus} alt="plus" />
             </span>
         </>
     );
