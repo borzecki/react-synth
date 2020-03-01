@@ -11,6 +11,7 @@ import { useKeysPress, useMedia } from './hooks';
 import './Synth.sass';
 import 'balloon-css';
 
+export const SoundContext = React.createContext();
 const Separator = () => <div className="Separator" />;
 
 const Synth = () => {
@@ -25,14 +26,19 @@ const Synth = () => {
         if ('1234'.indexOf(key) >= 0) {
             setType(soundTypes['1234'.indexOf(key)]);
         } else if ('-z'.indexOf(key) >= 0) {
-            setOctave(octave - 1);
+            setOctave(Math.max(octave - 1, -4));
         } else if ('=x'.indexOf(key) >= 0) {
-            setOctave(octave + 1);
+            setOctave(Math.min(octave + 1, 5));
+        } else if ('['.indexOf(key) >= 0) {
+            setDuration(Math.max(duration - 0.5, 0.5));
+        } else if (']'.indexOf(key) >= 0) {
+            setDuration(Math.min(duration + 0.5, 10));
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [key]);
 
     return (
-        <>
+        <SoundContext.Provider value={{ octave, duration, type }}>
             <SoundTypeControl active={type} onClick={setType} />
             <Separator />
             <NumericControl
@@ -51,14 +57,9 @@ const Synth = () => {
                 setValue={setDuration}
                 message="sound duration control"
             />
-            <ButtonBox
-                octave={octave}
-                duration={duration}
-                type={type}
-                showMessages={largeSceen}
-            />
+            <ButtonBox showMessages={largeSceen} />
             <Footer />
-        </>
+        </SoundContext.Provider>
     );
 };
 
